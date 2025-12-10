@@ -1,0 +1,44 @@
+; Charmap for customised/trimmed Bubblegum Round
+CHARMAP " ", 0
+CHARMAP "0", 1
+CHARMAP "1", 2
+CHARMAP "2", 3
+CHARMAP "3", 4
+CHARMAP "4", 5
+CHARMAP "5", 6
+CHARMAP "6", 7
+CHARMAP "7", 8
+CHARMAP "8", 9
+CHARMAP "9", 10
+
+CHARMAP "a", 11
+CHARMAP "b", 12
+CHARMAP "c", 13
+CHARMAP "d", 14
+CHARMAP "e", 15
+CHARMAP "f", 16
+CHARMAP "g", 17
+CHARMAP "h", 18
+CHARMAP "i", 19
+CHARMAP "j", 20
+CHARMAP "k", 21
+
+CHARMAP "l", 22
+CHARMAP "m", 23
+CHARMAP "n", 24
+CHARMAP "o", 25
+CHARMAP "p", 26
+CHARMAP "q", 27
+CHARMAP "r", 28
+CHARMAP "s", 29
+CHARMAP "t", 30
+CHARMAP "u", 31
+CHARMAP "v", 32
+
+CHARMAP "w", 33
+CHARMAP "x", 34
+CHARMAP "y", 35
+CHARMAP "z", 36
+CHARMAP "©", 37
+CHARMAP "!", 38
+CHARMAP ">", 39

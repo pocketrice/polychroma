@@ -12,11 +12,12 @@ SECTION "PolytalkState", ROM0
 
 PolyText:: db "polytalk", 255
 
+ClearText:: db "                ", 255
 SendWaitText:: db "press b to send!", 255
-SendingText:: db "sending         ", 255
-WaitText:: db "waiting         ", 255
-OKText:: db "received ok     ", 255
-NGText:: db "received fail   ", 255
+SendingText:: db "sending", 255
+WaitText:: db "waiting", 255
+OKText:: db "gotcha! ok", 255
+NGText:: db "gotcha! fail", 255
 
 InitPolytalkState::
 	; draw poly text
@@ -87,11 +88,15 @@ PolyUp_UpdateText:
 PolyTalk: ; send polytalk status byte 
 	; check if in waiting mode
 	xor a
-	ld hl, polyCount
+	ld hl, polyCount 
 	cp a, [hl]
 	jp nz, PolyTalk_Hear
 
 	; update status text (sending)
+	ld de, $98e4
+	ld hl, ClearText
+	call DrawTextTilesLoop
+
 	ld de, $98e4
 	ld hl, SendingText
 	call DrawTextTilesLoop
@@ -108,6 +113,10 @@ PolyTalk: ; send polytalk status byte
 	call PolyMorse
 
 	; update status text (waiting)
+	ld de, $98e4
+	ld hl, ClearText
+	call DrawTextTilesLoop
+
 	ld de, $9884
 	ld hl, WaitText
 	call DrawTextTilesLoop
@@ -126,6 +135,11 @@ PolyTalk_Hear: ; receive polytalk status instead
 	; go to terminate vvv
 	
 Terminar: ; finally finished!!
+	; clear old status text
+	ld de, $98e4
+	ld hl, ClearText
+	call DrawTextTilesLoop
+
 	xor a
 	ld hl, polyStatus
 	cp a, [hl]

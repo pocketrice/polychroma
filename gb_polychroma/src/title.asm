@@ -7,33 +7,49 @@ TitleText:: db "polychroma", 255
 InputText:: db "push start", 255
 CopyrightText:: db "© 2025 pocketrice", 255
 
-;titleTileData: INCBIN "generated/backgrounds/title.2bpp"
-;titleTileDataEnd:
+titleTileData: INCBIN "generated/title.2bpp"
+titleTileDataEnd:
 
-;titleTileMap: INCBIN "generated/backgrounds/title.tilemap"
-;titleTileMapEnd:
+titleTileMap: INCBIN "generated/title.tilemap"
+titleTileMapEnd:
 
 InitTitleState::
-	; draw title text
-	ld de, $9884
-	ld hl, TitleText
-	call DrawTextTilesLoop
+	; draw title logo
+	call DrawTitleLogo;
+
+	;; draw title text
+	;ld de, $9882
+	;ld hl, TitleText
+	;call DrawTextTilesLoop
 
 	; draw input text
 	ld de, $99a5
 	ld hl, InputText
 	call DrawTextTilesLoop
 
-	; draw copyright text
-	ld de, $8180
-	ld hl, CopyrightText
-	call DrawTextTilesLoop
+	;; draw copyright text
+	;ld de, $98c2
+	;ld hl, CopyrightText
+	;call DrawTextTilesLoop
 
 	; turn LCD on
-	ld a, LCDCF_ON | LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16
+	ld a, LCDCF_ON | LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ8
 	ld [rLCDC], a
 
 	ret
+
+DrawTitleLogo::
+	; copy tiles
+	ld de, titleTileData
+	ld hl, $9300
+	ld bc, titleTileDataEnd - titleTileData
+	call CopyDEintoMemoryAtHL
+
+	; copy tilemap
+	ld de, titleTileMap
+	ld hl, $9800
+	ld bc, titleTileMapEnd - titleTileMap
+	jp CopyDEintoMemoryAtHL_With52Offset
 
 UpdateTitleState::
 
@@ -47,7 +63,7 @@ call WaitForKeyFunction
 
 ; ===========================
 
-ld a, 1
+ld a, 1 ; TEMP DISABLE FOR VBLANK CONCERNS
 ld [wGameState], a
 jp NextGameState
 

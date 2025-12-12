@@ -22,7 +22,7 @@ FIXFLAGS := -v -p 0xFF
 
 $(GB_CART): $(OBJDIR)/main.o $(OBJDIR)/polytalk.o $(OBJDIR)/title.o $(OBJDIR)/input.o $(OBJDIR)/background-util.o $(OBJDIR)/input-util.o $(OBJDIR)/memory-util.o $(OBJDIR)/text-util.o $(OBJDIR)/vblank-util.o
 	rgblink -o $(GB_CART) -n $(GB_SYM) $(OBJDIR)/main.o $(OBJDIR)/polytalk.o $(OBJDIR)/title.o $(OBJDIR)/input.o $(OBJDIR)/background-util.o $(OBJDIR)/input-util.o $(OBJDIR)/memory-util.o $(OBJDIR)/text-util.o $(OBJDIR)/vblank-util.o
-	rgbfix -C -p 0xFF -v $(GB_CART)
+	rgbfix -c -p 0xFF -v $(GB_CART)
 
 $(OBJDIR)/main.o: $(SRCDIR)/main.asm
 	rgbasm -o $(OBJDIR)/main.o $(SRCDIR)/main.asm
